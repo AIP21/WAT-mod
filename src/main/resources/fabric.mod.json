@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "playertracker",
+  "version": "${version}",
+  "name": "PlayerTracker",
+  "description": "Tracks player positions as a cool project to learn modding",
+  "authors": [
+    "Anip24"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/playertracker/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.anip24.playertracker.Tracker"
+    ]
+  },
+  "mixins": [
+    "playertracker.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17",
+    "cloth-config": "6.1.48"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
