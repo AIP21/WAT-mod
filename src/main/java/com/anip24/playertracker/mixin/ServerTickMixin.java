@@ -1,6 +1,6 @@
 package com.anip24.playertracker.mixin;
 
-import com.anip24.playertracker.Config;
+import com.anip24.playertracker.ModConfig;
 import com.anip24.playertracker.Tracker;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerManager;
@@ -19,7 +19,7 @@ public class ServerTickMixin {
     @Shadow
     private PlayerManager playerManager;
 
-    private final Config config = Tracker.getConfig();
+    private final ModConfig config = Tracker.getConfig();
 
     @Shadow
     private int ticks;

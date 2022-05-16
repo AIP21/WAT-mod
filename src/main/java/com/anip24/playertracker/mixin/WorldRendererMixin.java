@@ -1,6 +1,6 @@
 package com.anip24.playertracker.mixin;
 
-import com.anip24.playertracker.Config;
+import com.anip24.playertracker.ModConfig;
 import com.anip24.playertracker.Tracker;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.WorldRenderer;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(WorldRenderer.class)
 public class WorldRendererMixin {
 
-    private final Config config = Tracker.getConfig();
+    private final ModConfig config = Tracker.getConfig();
 
     @Shadow
     private int ticks = 0;
@@ -26,8 +26,7 @@ public class WorldRendererMixin {
         if (!config.enabled) return;
 
         if (entity instanceof PlayerEntity) {
-            Tracker.AddToList((PlayerEntity) entity);
-            System.out.println("Added to list");
+            Tracker.RegisterPlayer((PlayerEntity) entity);
         }
     }
 
@@ -37,7 +36,8 @@ public class WorldRendererMixin {
 
         if (ticks % Tracker.getConfig().frequency == 0) {
             Tracker.LogPositions();
-            System.out.println("Log tick called");
+            if (config.debugLogging)
+                System.out.println("Log tick called");
         }
     }
 

@@ -8,15 +8,18 @@
     "Anip24"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/AIP21/PlayerTracker",
+    "sources": "https://github.com/AIP21/PlayerTracker"
   },
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/playertracker/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
       "com.anip24.playertracker.Tracker"
+    ],
+    "modmenu": [
+      "com.anip24.playertracker.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -25,11 +28,24 @@
   "depends": {
     "fabricloader": ">=0.11.3",
     "fabric": "*",
-    "minecraft": "1.18.x",
-    "java": ">=17",
-    "cloth-config": "6.1.48"
+    "minecraft": ">=1.16",
+    "java": ">=15",
+    "cloth-config": ">=6.1.48"
   },
   "suggests": {
     "another-mod": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.github": "https://github.com/AIP21/PlayerTracker"
+      },
+      "parent": {
+        "id": "playertracker",
+        "name": "Player Traccker",
+        "description": "Modular example library",
+        "icon": "assets/playertracker/icon.png"
+      }
+    }
   }
 }

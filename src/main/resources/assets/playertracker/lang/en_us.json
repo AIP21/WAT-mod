@@ -1,0 +1,6 @@
+{
+  "text.autoconfig.playertracker.title": "Player tracker config",
+  "text.autoconfig.playertracker.option.enabled": "Toggle player tracking",
+  "text.autoconfig.playertracker.option.frequency": "Logging frequency",
+  "text.autoconfig.playertracker.option.debugLogging": "Toggle debug logging"
+}
