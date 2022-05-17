@@ -30,7 +30,7 @@
     "fabric": "*",
     "minecraft": ">=1.16",
     "java": ">=15",
-    "cloth-config": ">=6.1.48"
+    "cloth-config": ">=4.6.0"
   },
   "suggests": {
     "another-mod": "*"
