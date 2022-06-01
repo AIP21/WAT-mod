@@ -18,7 +18,7 @@ public class ModConfig implements ConfigData {
     public boolean debugLogging = false;
 
     @Override
-    public void validatePostLoad() throws ConfigData.ValidationException {
+    public void validatePostLoad() {
         if (frequency < 20) frequency = 20;
     }
 }

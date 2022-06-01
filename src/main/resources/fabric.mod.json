@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "id": "playertracker",
   "version": "${version}",
-  "name": "PlayerTracker",
-  "description": "Tracks player positions as a cool project to learn modding",
+  "name": "WAT - Where are they?",
+  "description": "A mod to track and log the position of every player connected to a server.",
   "authors": [
     "Anip24"
   ],
   "contact": {
-    "homepage": "https://github.com/AIP21/PlayerTracker",
-    "sources": "https://github.com/AIP21/PlayerTracker"
+    "homepage": "https://modrinth.com/mod/wat",
+    "sources": "https://github.com/AIP21/WAT-mod"
   },
   "license": "MIT",
   "icon": "assets/playertracker/icon.png",
@@ -26,11 +26,9 @@
     "playertracker.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.11.3",
-    "fabric": "*",
-    "minecraft": ">=1.16",
-    "java": ">=15",
-    "cloth-config": ">=4.6.0"
+    "minecraft": ">=1.17",
+    "fabricloader": ">=0.9.0",
+    "cloth-config2": ">=4.14.54"
   },
   "suggests": {
     "another-mod": "*"
@@ -38,12 +36,14 @@
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.github": "https://github.com/AIP21/PlayerTracker"
+        "mod.github": "https://github.com/AIP21/WAT-mod",
+        "mod.modrinth": "https://modrinth.com/mod/wat",
+        "companion.github": "https://github.com/AIP21/TrackerDecoderApp"
       },
       "parent": {
         "id": "playertracker",
-        "name": "Player Traccker",
-        "description": "Modular example library",
+        "name": "WAT - Where are they?",
+        "description": "A mod to track and log the position of every player connected to a server.",
         "icon": "assets/playertracker/icon.png"
       }
     }
