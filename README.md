@@ -2,7 +2,7 @@
 
 # WAT *(Where are they?)*
 
-[![MIT License](https://img.shields.io/github/license/StartsMercury/simply-no-shading)](LICENSE)
+[![MIT License](https://img.shields.io/github/license/AIP21/WAT-mod)](LICENSE)
 [![FabricMC](https://img.shields.io/badge/mod%20loader-fabric-1976d2)](https://fabricmc.net)
 [![FabricMC Tutorial Wiki: Side](https://img.shields.io/badge/environment-client-1976d2)](https://fabricmc.net/wiki/tutorial:side)
 [![FabricMC Tutorial Wiki: Side](https://img.shields.io/badge/environment-server-1976d2)](https://fabricmc.net/wiki/tutorial:side)
