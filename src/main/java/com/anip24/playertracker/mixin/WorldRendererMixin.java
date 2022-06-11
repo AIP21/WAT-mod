@@ -1,7 +1,9 @@
 package com.anip24.playertracker.mixin;
 
 import com.anip24.playertracker.ModConfig;
-import com.anip24.playertracker.Tracker;
+import com.anip24.playertracker.TrackerClient;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -13,10 +15,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@Environment(EnvType.CLIENT)
 @Mixin(WorldRenderer.class)
 public class WorldRendererMixin {
-
-    private final ModConfig config = Tracker.getConfig();
+    private final ModConfig config = TrackerClient.getConfig();
 
     @Shadow
     private int ticks = 0;
@@ -26,7 +28,7 @@ public class WorldRendererMixin {
         if (!config.enabled) return;
 
         if (entity instanceof PlayerEntity) {
-            Tracker.RegisterPlayer((PlayerEntity) entity);
+            TrackerClient.RegisterPlayer((PlayerEntity) entity);
         }
     }
 
@@ -34,22 +36,13 @@ public class WorldRendererMixin {
     private void tick(CallbackInfo ci) {
         if (!config.enabled) return;
 
-        if (ticks % Tracker.getConfig().frequency == 0) {
-            Tracker.LogPositions();
-            if (config.debugLogging)
+        if (ticks % TrackerClient.getConfig().frequency == 0) {
+            TrackerClient.CheckDateChange();
+
+            TrackerClient.LogPositions();
+
+            if (config.debugLogging && TrackerClient.trackedPlayers.size() != 0)
                 System.out.println("Log tick called");
         }
     }
-
-//    @Inject(method = "render", at = @At(value = "RETURN"))
-//    private void render(MatrixStack matrices, float tickDelta, long limitTime, boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightmapTextureManager, Matrix4f matrix, CallbackInfo info) {
-//
-//        if (tick > 50) {
-//            tick = 0;
-//            Tracker.LogPositions();
-//            System.out.println("ticked");
-//        } else {
-//            tick++;
-//        }
-//    }
 }

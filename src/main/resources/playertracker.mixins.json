@@ -3,9 +3,12 @@
   "minVersion": "0.8",
   "package": "com.anip24.playertracker.mixin",
   "compatibilityLevel": "JAVA_9",
-  "mixins": [
+  "mixins": [],
+  "server": [
     "MinecraftServerAccessor",
-    "ServerTickMixin",
+    "ServerTickMixin"
+  ],
+  "client": [
     "WorldRendererMixin"
   ],
   "injectors": {
