@@ -116,5 +116,7 @@ public class TrackerServer implements DedicatedServerModInitializer {
             if (config.debugLogging)
                 System.out.println(result ? "Successfully created" : "Failed to create" + " the log container folder");
         }
+
+        CreateFile();
     }
 }
