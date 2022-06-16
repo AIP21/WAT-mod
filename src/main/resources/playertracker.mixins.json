@@ -9,6 +9,7 @@
     "ServerTickMixin"
   ],
   "client": [
+    "MinecraftServerAccessor",
     "WorldRendererMixin"
   ],
   "injectors": {
