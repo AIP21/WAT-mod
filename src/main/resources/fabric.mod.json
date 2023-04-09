@@ -35,16 +35,9 @@
   "custom": {
     "modmenu": {
       "links": {
-        "mod.github": "https://github.com/AIP21/WAT-mod",
-        "mod.modrinth": "https://modrinth.com/mod/wat",
-        "mod.curseforge": "https://www.curseforge.com/minecraft/mc-mods/wat-mod",
-        "companion.github": "https://github.com/AIP21/TrackerDecoderApp"
-      },
-      "parent": {
-        "id": "playertracker",
-        "name": "WAT - Where are they?",
-        "description": "A mod to track and log the position of every player connected to a server.",
-        "icon": "assets/playertracker/icon.png"
+        "Modrinth": "https://modrinth.com/mod/wat",
+        "Curseforge": "https://www.curseforge.com/minecraft/mc-mods/wat-mod",
+        "Companion Github": "https://github.com/AIP21/TrackerDecoderApp"
       }
     }
   }

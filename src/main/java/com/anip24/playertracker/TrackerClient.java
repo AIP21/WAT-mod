@@ -1,17 +1,22 @@
 package com.anip24.playertracker;
 
 import com.anip24.playertracker.mixin.MinecraftServerAccessor;
+import com.sun.jna.platform.win32.OaIdl;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.C2SPlayChannelEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientLoginConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.MinecraftDedicatedServer;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
@@ -55,14 +60,20 @@ public class TrackerClient implements ClientModInitializer {
                 if (client.isInSingleplayer()) {
                     worldName = ((MinecraftServerAccessor) Objects.requireNonNull(client.getServer())).tracker_getSession().getDirectoryName();
                 } else {
-                    worldName = Objects.requireNonNull(client.getCurrentServerEntry()).name;
+                    worldName = config.useServerName ? Objects.requireNonNull(client.getCurrentServerEntry()).name : String.valueOf(client.getNetworkHandler().getConnection().getAddress().toString().replace(":", "_"));
+                    worldName = worldName.substring(worldName.indexOf("/") + 1);
                 }
             }
+
+            System.out.println(worldName);
 
             String filename = worldName + "-overworld-log-" + LocalDate.now() + ".txt";
 
             overworldLogFile = new File(basePath, filename);
-            if (!overworldLogFile.exists() && overworldLogFile.createNewFile()) {
+            System.out.println(overworldLogFile.getAbsolutePath());
+            System.out.println(overworldLogFile.exists());
+
+            if (overworldLogFile.createNewFile()) {
                 if (config.debugLogging)
                     System.out.println("Overworld log file created: " + filename);
             } else {
@@ -73,7 +84,7 @@ public class TrackerClient implements ClientModInitializer {
             filename = worldName + "-nether-log-" + LocalDate.now() + ".txt";
 
             netherLogFile = new File(basePath, filename);
-            if (!netherLogFile.exists() && netherLogFile.createNewFile()) {
+            if (netherLogFile.createNewFile()) {
                 if (config.debugLogging)
                     System.out.println("Nether log file created: " + filename);
             } else {
@@ -84,7 +95,7 @@ public class TrackerClient implements ClientModInitializer {
             filename = worldName + "-end-log-" + LocalDate.now() + ".txt";
 
             endLogFile = new File(basePath, filename);
-            if (!endLogFile.exists() && endLogFile.createNewFile()) {
+            if (endLogFile.createNewFile()) {
                 if (config.debugLogging)
                     System.out.println("End log file created: " + filename);
             } else {
@@ -92,7 +103,7 @@ public class TrackerClient implements ClientModInitializer {
                     System.out.println("End log file with name " + filename + " already exists.");
             }
         } catch (IOException e) {
-            System.out.println("An error occurred in creating a log file: ");
+            System.err.println("An error occurred in creating a log file:");
             e.printStackTrace();
         }
     }
@@ -118,7 +129,7 @@ public class TrackerClient implements ClientModInitializer {
                         player.getBlockPos().toShortString()));
                 myWriter.close();
             } catch (IOException e) {
-                System.out.println("An error occurred in logging the player position: " + e);
+                System.err.println("An error occurred in logging the player position:");
                 e.printStackTrace();
             }
         }
@@ -130,7 +141,8 @@ public class TrackerClient implements ClientModInitializer {
             if (client.isInSingleplayer()) {
                 nWN = ((MinecraftServerAccessor) Objects.requireNonNull(client.getServer())).tracker_getSession().getDirectoryName();
             } else {
-                nWN = Objects.requireNonNull(client.getCurrentServerEntry()).name;
+                nWN = config.useServerName ? Objects.requireNonNull(client.getCurrentServerEntry()).name : String.valueOf(client.getNetworkHandler().getConnection().getAddress().toString().replace(":", "_"));
+                nWN = nWN.substring(nWN.indexOf("/") + 1);
             }
         }
 
@@ -171,8 +183,8 @@ public class TrackerClient implements ClientModInitializer {
         client = MinecraftClient.getInstance();
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, _client) -> {
-            TrackerClient.CreateFile();
             trackedPlayers.clear();
+            TrackerClient.CreateFile();
 
             if (config.debugLogging)
                 System.out.println("Joined new world or server");

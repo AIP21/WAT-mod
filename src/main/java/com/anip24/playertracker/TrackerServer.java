@@ -61,7 +61,7 @@ public class TrackerServer implements DedicatedServerModInitializer {
                     System.out.println("End log file with name " + filename + " already exists.");
             }
         } catch (IOException e) {
-            System.out.println("An error occurred in creating a log file: ");
+            System.err.println("An error occurred in creating a log file:");
             e.printStackTrace();
         }
     }
@@ -86,7 +86,7 @@ public class TrackerServer implements DedicatedServerModInitializer {
                     player.getBlockPos().toShortString()));
             myWriter.close();
         } catch (IOException e) {
-            System.out.println("An error occurred in logging the player position: ");
+            System.err.println("An error occurred in logging the player position:");
             e.printStackTrace();
         }
     }

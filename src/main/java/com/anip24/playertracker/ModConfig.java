@@ -15,6 +15,10 @@ public class ModConfig implements ConfigData {
     public int frequency = 100;
 
     @ConfigEntry.Gui.Tooltip(count = 0)
+    @Comment("Whether or not to use the name of the server, or the IP address of the connected server, as the name of the world.")
+    public boolean useServerName = false;
+
+    @ConfigEntry.Gui.Tooltip(count = 0)
     public boolean debugLogging = false;
 
     @Override
