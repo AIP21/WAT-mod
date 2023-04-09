@@ -28,6 +28,8 @@ It is a great way to see what the players on your server are doing and where the
 
 The mod lets you configure the rate at which positions are logged, in ticks. You can use either the config file or ModMenu if you use it on your client.
 
+TLDR: It's like [nocom](https://github.com/nerdsinspace/nocom-explanation/blob/main/README.md) but serverside.
+
 **NOTICE: This mod only tracks connected player names and positions, no other information is collected. I do not collect any data from this mod.**
 
 
