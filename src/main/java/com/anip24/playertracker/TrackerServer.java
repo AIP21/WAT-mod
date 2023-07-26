@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.World;
 
 import java.io.File;
@@ -67,7 +67,7 @@ public class TrackerServer implements DedicatedServerModInitializer {
     }
 
     public static void LogPosition(PlayerEntity player) {
-        RegistryKey<World> world = player.world.getRegistryKey();
+        RegistryKey<World> world = player.getWorld().getRegistryKey();
 
         File targetFile;
         if (world == World.NETHER) {
