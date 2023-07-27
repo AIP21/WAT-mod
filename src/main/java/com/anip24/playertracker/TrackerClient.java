@@ -18,7 +18,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.MinecraftDedicatedServer;
 import net.minecraft.server.integrated.IntegratedServer;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.World;
 
 import java.io.File;
@@ -110,7 +110,7 @@ public class TrackerClient implements ClientModInitializer {
 
     public static void LogPositions() {
         for (PlayerEntity player : trackedPlayers) {
-            RegistryKey<World> world = player.world.getRegistryKey();
+            RegistryKey<World> world = player.getWorld().getRegistryKey();
 
             File targetFile;
             if (world == World.NETHER) {
